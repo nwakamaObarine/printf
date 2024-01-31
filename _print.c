@@ -19,29 +19,43 @@ int _printf(const char *format, ...)
 	}
 	while (*format)
 	{
-		if (format != '%')
+		if (*format != '%')
 		{
 			write(1, format, 1);
 			string_counter++;
 		}
-		else if (format == 'c')
+		else
 		{
-			arine = va_arg(string_list, int);
-			write(1, &arine, 1);
-			string_counter++;
-		}
-		else if (format == 's')
-		{
-			*temi = va_arg(string_list, char *);
-			while (temi[str_len] != '\0')
+			format++;
+			if (*format == '\0')
 			{
-				str_len++;
+				break;
+			}
+			else if (*format == '%')
+			{
+				write(1, format, 1);
+				string_counter++;
+			}
+			else if (*format == 'c')
+			{
+				arine = va_arg(string_list, int);
+				write(1, &arine, 1);
+				string_counter++;
+			}
+			else if (*format == 's')
+			{
+				temi = va_arg(string_list, char*);
+				while (temi[str_len] != '\0')
+				{
+					str_len++;
+				}
 				write(1, temi, str_len);
 				string_counter += str_len;
 			}
 		}
 		format++;
+	}
 		va_end(string_list);
 		return (string_counter);
 	}
-
+}
