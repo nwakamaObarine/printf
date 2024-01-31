@@ -2,8 +2,7 @@
 /**
  * _printf - prints to standard output
  *@format: string tobe printed
-
-Return: 0
+ *Return: 0
 */
 int _printf(const char *format, ...)
 {
@@ -18,7 +17,7 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	while(*format)
+	while (*format)
 	{
 		if (format != '%')
 		{
@@ -33,12 +32,12 @@ int _printf(const char *format, ...)
 		}
 		else if (format == 's')
 		{
-			*temi =va_arg(string_list, char *);
+			*temi = va_arg(string_list, char *);
 			while (temi[str_len] != '\0')
 			{
 				str_len++;
 				write(1, temi, str_len);
-				string_counter+=str_len;
+				string_counter += str_len;
 			}
 		}
 		format++;
