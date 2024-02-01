@@ -57,5 +57,4 @@ int _printf(const char *format, ...)
 	}
 		va_end(string_list);
 		return (string_counter);
-	}
 }
