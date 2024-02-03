@@ -12,19 +12,14 @@ int _printf(const char *format, ...)
 	char arine;
 	va_list string_list;
 
-	va_start(string_list, format);
 	if (format == NULL)
 	{
 		return (-1);
 	}
+	va_start(string_list, format);
 	while (*format)
 	{
-		if (*format != '%')
-		{
-			write(1, format, 1);
-			string_counter++;
-		}
-		else
+		if (*format == '%')
 		{
 			format++;
 			if (*format == '\0')
@@ -44,17 +39,23 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				temi = va_arg(string_list, char*);
+				temi = va_arg(string_list, char *);
 				while (temi[str_len] != '\0')
 				{
 					str_len++;
 				}
 				write(1, temi, str_len);
-				string_counter += str_len;
+				string_counter++;
 			}
 		}
+		else
+		{
+			write(1, format, 1);
+			string_counter++;
+		}
+		string_counter += str_len;
 		format++;
 	}
-		va_end(string_list);
-		return (string_counter);
+	va_end(string_list);
+	return (string_counter);
 }
